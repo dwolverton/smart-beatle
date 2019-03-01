@@ -1,7 +1,8 @@
-package com.iwolverton.smartbeatle;
+package com.iwolverton.smartbeatle.elements;
 
 import java.awt.Color;
 
+import com.iwolverton.smartbeatle.Coord;
 import com.iwolverton.smartbeatle.internal.DrawingParams;
 
 public class Bead extends GameElement {
@@ -10,6 +11,10 @@ public class Bead extends GameElement {
 
 	public Bead(int x, int y) {
 		super(x, y);
+	}
+	
+	public Bead(Coord coord) {
+		this(coord.getX(), coord.getY());
 	}
 	
 	@Override

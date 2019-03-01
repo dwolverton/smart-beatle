@@ -1,7 +1,8 @@
-package com.iwolverton.smartbeatle;
+package com.iwolverton.smartbeatle.elements;
 
 import java.awt.Color;
 
+import com.iwolverton.smartbeatle.Coord;
 import com.iwolverton.smartbeatle.internal.DrawingParams;
 
 public class Beatle extends ActingElement {
@@ -19,6 +20,14 @@ public class Beatle extends ActingElement {
 	
 	public Beatle(int x, int y) {
 		super(x, y, 1);
+	}
+	
+	public Beatle(Coord coord) {
+		this(coord.getX(), coord.getY());
+	}
+	
+	public Beatle withCoords(int x, int y) {
+		return new Beatle(x, y, charge, ammo);
 	}
 	
 	public int getCharge() {

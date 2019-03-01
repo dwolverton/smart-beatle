@@ -7,8 +7,8 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
-import com.iwolverton.smartbeatle.GameElement;
 import com.iwolverton.smartbeatle.GameState;
+import com.iwolverton.smartbeatle.elements.GameElement;
 
 public class GameFieldPanel extends JPanel {
 

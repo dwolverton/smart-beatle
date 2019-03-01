@@ -3,6 +3,15 @@ package com.iwolverton.smartbeatle;
 import java.util.Collections;
 import java.util.List;
 
+import com.iwolverton.smartbeatle.elements.ActingElement;
+import com.iwolverton.smartbeatle.elements.AntHill;
+import com.iwolverton.smartbeatle.elements.Bead;
+import com.iwolverton.smartbeatle.elements.Beatle;
+import com.iwolverton.smartbeatle.elements.ChargingPad;
+import com.iwolverton.smartbeatle.elements.FireAnt;
+import com.iwolverton.smartbeatle.elements.GameElement;
+import com.iwolverton.smartbeatle.elements.Spider;
+
 public class GameState {
 
 	public static final int FIELD_DIMENSION = 20;
@@ -23,6 +32,11 @@ public class GameState {
 		this.beatle = beatle;
 		this.spider = spider;
 		this.fireAnts = Collections.unmodifiableList(fireAnts);
+	}
+	
+	public GameState withBeatle(Beatle newBeatle) {
+		return new GameState(chargingPads, antHill, beads, newBeatle, spider,
+				fireAnts);
 	}
 
 	public List<ChargingPad> getChargingPads() {

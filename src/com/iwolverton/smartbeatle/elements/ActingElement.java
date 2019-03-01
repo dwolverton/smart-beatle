@@ -1,4 +1,4 @@
-package com.iwolverton.smartbeatle;
+package com.iwolverton.smartbeatle.elements;
 
 public class ActingElement extends GameElement {
 

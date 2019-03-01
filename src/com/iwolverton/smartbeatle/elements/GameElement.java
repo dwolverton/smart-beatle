@@ -1,5 +1,6 @@
-package com.iwolverton.smartbeatle;
+package com.iwolverton.smartbeatle.elements;
 
+import com.iwolverton.smartbeatle.Coord;
 import com.iwolverton.smartbeatle.internal.DrawingParams;
 
 public class GameElement extends Coord {

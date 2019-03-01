@@ -1,7 +1,8 @@
-package com.iwolverton.smartbeatle;
+package com.iwolverton.smartbeatle.elements;
 
 import java.awt.Color;
 
+import com.iwolverton.smartbeatle.Coord;
 import com.iwolverton.smartbeatle.internal.DrawingParams;
 
 public class Spider extends ActingElement {
@@ -15,6 +16,10 @@ public class Spider extends ActingElement {
 	
 	public Spider(int x, int y) {
 		super(x, y, DEFAULT_FREQUENCY);
+	}
+	
+	public Spider(Coord coord) {
+		this(coord.getX(), coord.getY());
 	}
 	
 	@Override

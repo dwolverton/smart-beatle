@@ -26,7 +26,7 @@ public class Coord {
 	}
 	
 	public int rightAngleDistanceFrom(int x, int y) {
-		return Math.abs(x - this.x) + Math.abs(y = this.y); 
+		return Math.abs(x - this.x) + Math.abs(y - this.y); 
 	}
 	
 	public int rightAngleDistanceFrom(Coord other) {
@@ -34,7 +34,7 @@ public class Coord {
 	}
 	
 	public int diagonalDistanceFrom(int x, int y) {
-		return Math.max(Math.abs(x - this.x), Math.abs(y = this.y)); 
+		return Math.max(Math.abs(x - this.x), Math.abs(y - this.y)); 
 	}
 	
 	public int diagonalDistanceFrom(Coord other) {
