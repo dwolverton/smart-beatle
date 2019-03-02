@@ -16,27 +16,50 @@ public class GameState {
 
 	public static final int FIELD_DIMENSION = 20;
 
-	private List<ChargingPad> chargingPads;
-	private AntHill antHill;
-	private List<Bead> beads;
-	private Beatle beatle;
-	private Spider spider;
-	private List<FireAnt> fireAnts;
+	protected List<ChargingPad> chargingPads;
+	protected AntHill antHill;
+	protected List<Bead> beads;
+	protected Beatle beatle;
+	protected Spider spider;
+	protected List<FireAnt> fireAnts;
 
 	public GameState(List<ChargingPad> chargingPads, AntHill antHill,
 			List<Bead> beads, Beatle beatle, Spider spider,
 			List<FireAnt> fireAnts) {
-		this.chargingPads = Collections.unmodifiableList(chargingPads);
+		this.chargingPads = chargingPads;
 		this.antHill = antHill;
-		this.beads = Collections.unmodifiableList(beads);
+		this.beads = beads;
 		this.beatle = beatle;
 		this.spider = spider;
-		this.fireAnts = Collections.unmodifiableList(fireAnts);
+		this.fireAnts = fireAnts;
 	}
 	
-	public GameState withBeatle(Beatle newBeatle) {
-		return new GameState(chargingPads, antHill, beads, newBeatle, spider,
-				fireAnts);
+	public GameState(GameState from) {
+		chargingPads = from.chargingPads;
+		antHill = from.antHill;
+		beads = from.beads;
+		beatle = from.beatle;
+		spider = from.spider;
+		fireAnts = from.fireAnts;
+	}
+	
+	public GameState(GameState from, Beatle beatle) {
+		this(from);
+		this.beatle = beatle;
+	}
+	
+	public GameState(GameState from, Beatle beatle, List<FireAnt> fireAnts) {
+		this(from);
+		this.beatle = beatle;
+		this.fireAnts = fireAnts;
+	}
+	
+	public GameState getImmutable() {
+		GameState i = new GameState(this);
+		i.chargingPads = Collections.unmodifiableList(chargingPads);
+		i.beads = Collections.unmodifiableList(beads);
+		i.fireAnts = Collections.unmodifiableList(fireAnts);
+		return i;
 	}
 
 	public List<ChargingPad> getChargingPads() {
@@ -103,4 +126,5 @@ public class GameState {
 		return getNonPlayerAt(coordinate.getX(), coordinate.getY());
 	}
 
+	
 }

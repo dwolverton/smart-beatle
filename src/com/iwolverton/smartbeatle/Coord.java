@@ -41,6 +41,16 @@ public class Coord {
 		return diagonalDistanceFrom(other.x, other.y);
 	}
 	
+	public Direction directionTo(Coord other) {
+		int xDiff = other.getX() - x;
+		int yDiff = other.getY() - y;
+		if (Math.abs(xDiff) >= Math.abs(yDiff)) {
+			return xDiff > 0 ? Direction.E : Direction.W;
+		} else {
+			return yDiff > 0 ? Direction.S : Direction.N;
+		}
+	}
+	
 	@Override
 	public boolean equals(Object other) {
 		if (other instanceof Coord) {

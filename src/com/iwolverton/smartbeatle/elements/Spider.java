@@ -22,6 +22,10 @@ public class Spider extends ActingElement {
 		this(coord.getX(), coord.getY());
 	}
 	
+	public Spider(Coord coord, int nextMove) {
+		this(coord.getX(), coord.getY(), nextMove);
+	}
+	
 	@Override
 	public void draw(DrawingParams dp) {
 		dp.g.setColor(COLOR);

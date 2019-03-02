@@ -1,6 +1,6 @@
 package com.iwolverton.smartbeatle.elements;
 
-public class ActingElement extends GameElement {
+public abstract class ActingElement extends GameElement {
 
 	private int nextMove;
 
@@ -11,6 +11,19 @@ public class ActingElement extends GameElement {
 
 	public int getNextMove() {
 		return nextMove;
+	}
+	
+	@Override
+	public boolean equals(Object other) {
+		if (other instanceof ActingElement && ((ActingElement) other).getNextMove() != nextMove) {
+			return false;
+		}
+		return super.equals(other);
+	}
+	
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + "(" + x + "," + y + "," + nextMove + ")";
 	}
 
 }

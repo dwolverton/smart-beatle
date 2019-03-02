@@ -2,6 +2,7 @@ package com.iwolverton.smartbeatle.elements;
 
 import java.awt.Color;
 
+import com.iwolverton.smartbeatle.Coord;
 import com.iwolverton.smartbeatle.internal.DrawingParams;
 
 public class FireAnt extends ActingElement {
@@ -15,6 +16,10 @@ public class FireAnt extends ActingElement {
 	
 	public FireAnt(int x, int y) {
 		super(x, y, DEFAULT_FREQUENCY);
+	}
+	
+	public FireAnt(Coord coord) {
+		this(coord.getX(), coord.getY());
 	}
 	
 	@Override

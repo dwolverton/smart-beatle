@@ -22,7 +22,7 @@ public class GameFieldPanel extends JPanel {
 
 	public void setGameState(GameState state) {
 		this.state = state;
-		this.revalidate();
+		this.repaint();
 	}
 
 	@Override

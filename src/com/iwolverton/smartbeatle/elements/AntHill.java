@@ -22,6 +22,10 @@ public class AntHill extends ActingElement {
 	public AntHill(Coord coord) {
 		this(coord.getX(), coord.getY());
 	}
+	
+	public AntHill(Coord coord, int nextMove) {
+		this(coord.getX(), coord.getY(), nextMove);
+	}
 
 	@Override
 	public void draw(DrawingParams dp) {
