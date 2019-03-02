@@ -2,6 +2,7 @@ package com.iwolverton.smartbeatle.elements;
 
 import java.awt.Color;
 
+import com.iwolverton.smartbeatle.Coord;
 import com.iwolverton.smartbeatle.internal.DrawingParams;
 
 public class ChargingPad extends GameElement {
@@ -10,6 +11,10 @@ public class ChargingPad extends GameElement {
 
 	public ChargingPad(int x, int y) {
 		super(x, y);
+	}
+	
+	public ChargingPad(Coord coord) {
+		this(coord.getX(), coord.getY());
 	}
 
 	@Override

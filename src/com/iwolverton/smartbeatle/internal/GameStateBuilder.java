@@ -10,45 +10,50 @@ import com.iwolverton.smartbeatle.elements.ChargingPad;
 import com.iwolverton.smartbeatle.elements.FireAnt;
 import com.iwolverton.smartbeatle.elements.Spider;
 
-public class MutableGameState extends GameState {
+public class GameStateBuilder extends GameState {
 
-	public MutableGameState(List<ChargingPad> chargingPads, AntHill antHill,
+	public GameStateBuilder(List<ChargingPad> chargingPads, AntHill antHill,
 			List<Bead> beads, Beatle beatle, Spider spider,
 			List<FireAnt> fireAnts) {
 		super(chargingPads, antHill, beads, beatle, spider, fireAnts);
 	}
 
-	public MutableGameState(GameState from) {
+	public GameStateBuilder(GameState from) {
 		super(from);
 	}
 	
-	public MutableGameState(GameState from, Beatle beatle) {
-		super(from);
-		this.beatle = beatle;
+	public GameState build() {
+		return new GameState(this);
 	}
 
-	public void setChargingPads(List<ChargingPad> chargingPads) {
+	public GameStateBuilder setChargingPads(List<ChargingPad> chargingPads) {
 		this.chargingPads = chargingPads;
+		return this;
 	}
 
-	public void setAntHill(AntHill antHill) {
+	public GameStateBuilder setAntHill(AntHill antHill) {
 		this.antHill = antHill;
+		return this;
 	}
 
-	public void setBeads(List<Bead> beads) {
+	public GameStateBuilder setBeads(List<Bead> beads) {
 		this.beads = beads;
+		return this;
 	}
 
-	public void setBeatle(Beatle beatle) {
+	public GameStateBuilder setBeatle(Beatle beatle) {
 		this.beatle = beatle;
+		return this;
 	}
 
-	public void setSpider(Spider spider) {
+	public GameStateBuilder setSpider(Spider spider) {
 		this.spider = spider;
+		return this;
 	}
 
-	public void setFireAnts(List<FireAnt> fireAnts) {
+	public GameStateBuilder setFireAnts(List<FireAnt> fireAnts) {
 		this.fireAnts = fireAnts;
+		return this;
 	}
 
 }

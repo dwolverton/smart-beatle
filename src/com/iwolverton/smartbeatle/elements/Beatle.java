@@ -7,12 +7,12 @@ import com.iwolverton.smartbeatle.internal.DrawingParams;
 
 public class Beatle extends ActingElement {
 	
-	public static final int DEFAULT_START_CHARGE = 100;
+	public static final int MAX_CHARGE = 100;
 	public static final int DEFAULT_START_AMMO = 1;
 	private static final Color COLOR = new Color(0x0066ff);
 	
-	int charge = DEFAULT_START_CHARGE;
-	int ammo = DEFAULT_START_AMMO;
+	protected int charge = MAX_CHARGE;
+	protected int ammo = DEFAULT_START_AMMO;
 
 	public Beatle(int x, int y, int charge, int ammo) {
 		super(x, y, 1);
@@ -24,16 +24,16 @@ public class Beatle extends ActingElement {
 		super(x, y, 1);
 	}
 	
+	public Beatle(Beatle from) {
+		this(from.x, from.y, from.charge, from.ammo);
+	}
+	
 	public Beatle(Coord coord) {
 		this(coord.getX(), coord.getY());
 	}
 	
 	public Beatle(Coord coord, int charge, int ammo) {
 		this(coord.getX(), coord.getY(), charge, ammo);
-	}
-	
-	public Beatle withCoords(int x, int y) {
-		return new Beatle(x, y, charge, ammo);
 	}
 	
 	public int getCharge() {
@@ -67,6 +67,9 @@ public class Beatle extends ActingElement {
 		return true;
 	}
 	
+	@Override
+	public String toString() {
+		return super.toString() + "(" + charge + "," + ammo + ")";
+	}
 	
-
 }

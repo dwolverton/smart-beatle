@@ -9,6 +9,10 @@ public abstract class GameElement extends Coord {
 		super(x, y);
 	}
 	
+	public GameElement(Coord coord) {
+		super(coord);
+	}
+	
 	public abstract void draw(DrawingParams dp);
 	
 	@Override

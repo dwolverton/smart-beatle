@@ -14,7 +14,7 @@ public class Bead extends GameElement {
 	}
 	
 	public Bead(Coord coord) {
-		this(coord.getX(), coord.getY());
+		super(coord);
 	}
 	
 	@Override

@@ -1,11 +1,18 @@
 package com.iwolverton.smartbeatle.elements;
 
+import com.iwolverton.smartbeatle.Coord;
+
 public abstract class ActingElement extends GameElement {
 
 	private int nextMove;
 
 	public ActingElement(int x, int y, int nextMove) {
 		super(x, y);
+		this.nextMove = nextMove;
+	}
+	
+	public ActingElement(Coord coord, int nextMove) {
+		super(coord);
 		this.nextMove = nextMove;
 	}
 

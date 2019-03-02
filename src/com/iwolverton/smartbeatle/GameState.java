@@ -35,12 +35,7 @@ public class GameState {
 	}
 	
 	public GameState(GameState from) {
-		chargingPads = from.chargingPads;
-		antHill = from.antHill;
-		beads = from.beads;
-		beatle = from.beatle;
-		spider = from.spider;
-		fireAnts = from.fireAnts;
+		this(from.chargingPads, from.antHill, from.beads, from.beatle, from.spider, from.fireAnts);
 	}
 	
 	public GameState(GameState from, Beatle beatle) {
@@ -53,17 +48,9 @@ public class GameState {
 		this.beatle = beatle;
 		this.fireAnts = fireAnts;
 	}
-	
-	public GameState getImmutable() {
-		GameState i = new GameState(this);
-		i.chargingPads = Collections.unmodifiableList(chargingPads);
-		i.beads = Collections.unmodifiableList(beads);
-		i.fireAnts = Collections.unmodifiableList(fireAnts);
-		return i;
-	}
 
 	public List<ChargingPad> getChargingPads() {
-		return chargingPads;
+		return Collections.unmodifiableList(chargingPads);
 	}
 
 	public AntHill getAntHill() {
@@ -71,7 +58,7 @@ public class GameState {
 	}
 
 	public List<Bead> getBeads() {
-		return beads;
+		return Collections.unmodifiableList(beads);
 	}
 
 	public Beatle getBeatle() {
@@ -83,7 +70,7 @@ public class GameState {
 	}
 
 	public List<FireAnt> getFireAnts() {
-		return fireAnts;
+		return Collections.unmodifiableList(fireAnts);
 	}
 
 	public ActingElement getPlayerAt(int x, int y) {

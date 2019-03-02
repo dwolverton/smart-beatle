@@ -31,30 +31,30 @@ public class GameStateFactory {
 	}
 	
 	public GameState getRandomState() {
-		List<Coord> placed = new ArrayList<>();
-		ChargingPad p1 = new ChargingPad(randCoord(), randCoord());
+		CollisionDetector collisionDetector = new CollisionDetector();
+		ChargingPad p1 = new ChargingPad(randCoord());
 		ChargingPad p2;
 		do {
-			p2 = new ChargingPad(randCoord(), randCoord());
+			p2 = new ChargingPad(randCoord());
 		} while (p2.diagonalDistanceFrom(p1) < 5);
-		placed.add(p1);
-		placed.add(p2);
+		collisionDetector.add(p1);
+		collisionDetector.add(p2);
 		
-		AntHill hill = new AntHill(randCoordWithoutCollision(placed));
-		placed.add(hill);
+		AntHill hill = new AntHill(collisionDetector.randCoordWithoutCollision());
+		collisionDetector.add(hill);
 		
 		List<Bead> beads = new ArrayList<>();
 		for (int i = 0; i < 3; i++) {
-			Bead bead = new Bead(randCoordWithoutCollision(placed));
+			Bead bead = new Bead(collisionDetector.randCoordWithoutCollision());
 			beads.add(bead);
-			placed.add(bead);
+			collisionDetector.add(bead);
 		}
 		
-		Beatle beatle = new Beatle(randCoordWithoutCollision(placed));
-		placed.add(beatle);
+		Beatle beatle = new Beatle(collisionDetector.randCoordWithoutCollision());
+		collisionDetector.add(beatle);
 		
-		Spider spider = new Spider(randCoordWithoutCollision(placed));
-		placed.add(spider);
+		Spider spider = new Spider(collisionDetector.randCoordWithoutCollision());
+		collisionDetector.add(spider);
 		
 		return new GameState(
 				Arrays.asList(p1, p2),
@@ -66,21 +66,12 @@ public class GameStateFactory {
 				);
 	}
 	
-	private static int randCoord() {
+	public static int randCoordPart() {
 		return rand.nextInt(GameState.FIELD_DIMENSION);
 	}
 	
-	private static Coord randCoordWithoutCollision(Iterable<Coord> others) {
-		Coord c;
-		newCoord: do {
-			c = new Coord(randCoord(), randCoord());
-			for (Coord other : others) {
-				if (c.equals(other)) {
-					continue newCoord;
-				}
-			}
-		} while (false);
-		return c;
+	public static Coord randCoord() {
+		return new Coord(randCoordPart(), randCoordPart());
 	}
 	
 
