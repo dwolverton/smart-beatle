@@ -47,9 +47,25 @@ public class Coord {
 	}
 	
 	public Direction directionTo(Coord other) {
+		if (x == other.x && y == other.y) {
+			return Direction.X;
+		}
 		int xDiff = other.getX() - x;
 		int yDiff = other.getY() - y;
 		if (Math.abs(xDiff) >= Math.abs(yDiff)) {
+			return xDiff > 0 ? Direction.E : Direction.W;
+		} else {
+			return yDiff > 0 ? Direction.S : Direction.N;
+		}
+	}
+	
+	public Direction altDirectionTo(Coord other) {
+		if (x == other.x && y == other.y) {
+			return Direction.X;
+		}
+		int xDiff = other.getX() - x;
+		int yDiff = other.getY() - y;
+		if (Math.abs(xDiff) < Math.abs(yDiff)) {
 			return xDiff > 0 ? Direction.E : Direction.W;
 		} else {
 			return yDiff > 0 ? Direction.S : Direction.N;

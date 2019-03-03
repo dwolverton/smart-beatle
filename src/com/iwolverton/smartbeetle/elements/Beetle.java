@@ -8,11 +8,12 @@ import com.iwolverton.smartbeetle.internal.DrawingParams;
 public class Beetle extends ActingElement {
 	
 	public static final int MAX_CHARGE = 100;
-	public static final int DEFAULT_START_AMMO = 1;
+	public static final int START_CHARGE = 50;
+	public static final int START_AMMO = 1;
 	private static final Color COLOR = new Color(0x0066ff);
 	
-	protected int charge = MAX_CHARGE;
-	protected int ammo = DEFAULT_START_AMMO;
+	protected int charge = START_CHARGE;
+	protected int ammo = START_AMMO;
 
 	public Beetle(int x, int y, int charge, int ammo) {
 		super(x, y, 1);

@@ -16,6 +16,7 @@ public class GameState {
 
 	public static final int FIELD_DIMENSION = 20;
 
+	protected int turn;
 	protected List<ChargingPad> chargingPads;
 	protected AntHill antHill;
 	protected List<Bead> beads;
@@ -23,9 +24,10 @@ public class GameState {
 	protected Spider spider;
 	protected List<FireAnt> fireAnts;
 
-	public GameState(List<ChargingPad> chargingPads, AntHill antHill,
+	public GameState(int turn, List<ChargingPad> chargingPads, AntHill antHill,
 			List<Bead> beads, Beetle beetle, Spider spider,
 			List<FireAnt> fireAnts) {
+		this.turn = turn;
 		this.chargingPads = chargingPads;
 		this.antHill = antHill;
 		this.beads = beads;
@@ -35,7 +37,7 @@ public class GameState {
 	}
 	
 	public GameState(GameState from) {
-		this(from.chargingPads, from.antHill, from.beads, from.beetle, from.spider, from.fireAnts);
+		this(from.turn, from.chargingPads, from.antHill, from.beads, from.beetle, from.spider, from.fireAnts);
 	}
 	
 	public GameState(GameState from, Beetle beetle) {
@@ -47,6 +49,10 @@ public class GameState {
 		this(from);
 		this.beetle = beetle;
 		this.fireAnts = fireAnts;
+	}
+	
+	public int getTurn() {
+		return turn;
 	}
 
 	public List<ChargingPad> getChargingPads() {

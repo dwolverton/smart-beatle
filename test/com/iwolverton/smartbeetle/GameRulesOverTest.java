@@ -18,6 +18,7 @@ import com.iwolverton.smartbeetle.internal.GameRules;
 public class GameRulesOverTest {
 	
 	GameState state = new GameState(
+			0,
 			Arrays.asList(new ChargingPad(3, 3), new ChargingPad(16, 17)),
 			new AntHill(17, 4),
 			Arrays.asList(new Bead(6, 8), new Bead(14, 8), new Bead(10, 15)),

@@ -2,6 +2,8 @@ package com.iwolverton.smartbeetle.internal;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
@@ -14,14 +16,17 @@ public class GameFieldPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private GameState state;
+	private boolean gameOver;
 	private DrawingParams dp;
 	private Graphics2D g;
 
 	private static final Color BACKGROUND_COLOR = new Color(0xf9f2ec);
 	private static final Color GRID_COLOR = new Color(0x734d26);
+	private static final Color GAME_OVER_COLOR = new Color(0xff33cc);
 
-	public void setGameState(GameState state) {
+	public void setGameState(GameState state, boolean gameOver) {
 		this.state = state;
+		this.gameOver = gameOver;
 		this.repaint();
 	}
 
@@ -32,6 +37,9 @@ public class GameFieldPanel extends JPanel {
 		drawBackground();
 		drawElements();
 		drawGrid();
+		if (gameOver) {
+			drawGameOver();
+		}
 	}
 
 	private void drawBackground() {
@@ -63,6 +71,18 @@ public class GameFieldPanel extends JPanel {
 		for (GameElement el : elements) {
 			el.draw(dp);
 		}
+	}
+	
+	private void drawGameOver() {
+		Font font = new Font(Font.SANS_SERIF, Font.BOLD, getWidth() / 8);
+		g.setFont(font);
+		g.setColor(GAME_OVER_COLOR);
+		
+	    FontMetrics metrics = g.getFontMetrics(font);
+	    int x = (getWidth() - metrics.stringWidth("GAME OVER")) / 2;
+	    
+	    g.drawString("GAME OVER", x, getHeight() * 2 / 5);
+		
 	}
 
 }

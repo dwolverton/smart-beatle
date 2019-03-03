@@ -8,10 +8,10 @@ import com.iwolverton.smartbeetle.internal.DrawingParams;
 
 public class AntHill extends ActingElement {
 	
-	public static final int DEFAULT_FREQUENCY = 20;
+	public static final int START_FREQUENCY = 100;
 	private static final Color COLOR = new Color(0xbf8040);
 	
-	private int frequency = DEFAULT_FREQUENCY;
+	private int frequency = START_FREQUENCY;
 
 	public AntHill(int x, int y, int nextMove, int frequency) {
 		super(x, y, nextMove);
@@ -19,7 +19,7 @@ public class AntHill extends ActingElement {
 	}
 	
 	public AntHill(int x, int y) {
-		super(x, y, DEFAULT_FREQUENCY);
+		super(x, y, START_FREQUENCY);
 	}
 	
 	public AntHill(Coord coord) {

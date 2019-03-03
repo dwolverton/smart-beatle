@@ -1,3 +1,4 @@
+package com.iwolverton.smartbeetle;
 import java.awt.BorderLayout;
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
@@ -9,40 +10,45 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.iwolverton.smartbeetle.Direction;
-import com.iwolverton.smartbeetle.GameState;
 import com.iwolverton.smartbeetle.actions.Action;
 import com.iwolverton.smartbeetle.internal.GameFieldPanel;
 import com.iwolverton.smartbeetle.internal.GameRules;
 import com.iwolverton.smartbeetle.internal.GameStateFactory;
 
-public class SmartBeetle extends JFrame {
+public class Game extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
-	GameFieldPanel field = new GameFieldPanel();
-	JLabel stats = new JLabel();
-	GameRules rules = new GameRules();
-	GameState state;
+	private GameFieldPanel field = new GameFieldPanel();
+	private JLabel stats = new JLabel();
+	private JButton scoreAiButton = new JButton("Score AI");
+	private JButton runAiButton = new JButton("Run AI");
+	private JButton newGameButton = new JButton("New Game");
+	
+	private GameRules rules = new GameRules();
+	private GameState state;
+	private boolean error;
+	private boolean gameOver;
+	private Class<? extends BeetleAi> aiClass;
 
-	public static void main(String[] args) {
-		new SmartBeetle();
-	}
-
-	public SmartBeetle() {
+	public Game(Class<? extends BeetleAi> aiClass) {
+		this.aiClass = aiClass;
+		
 		setTitle("Smart Beetle");
-		setSize(500, 500);
+		setSize(540, 540);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(true);
 		setLocationRelativeTo(null);
-
-		// state = GameStateFactory.getTestState1();
-		state = new GameStateFactory().getRandomState();
-		updateState();
+		
+		newGameButton.addActionListener(e -> startNewGame());
+		runAiButton.addActionListener(e -> runAi());
 
 		JPanel bar = new JPanel();
-		bar.add(new JButton("Score AI"));
-		bar.add(new JButton("Run AI"));
+		if (aiClass != null) {
+			bar.add(scoreAiButton);
+			bar.add(runAiButton);
+		}
+		bar.add(newGameButton);
 		bar.add(stats);
 		add(bar);
 
@@ -74,15 +80,28 @@ public class SmartBeetle extends JFrame {
 					}
 				});
 
+
+		startNewGame();
+
 		setVisible(true);
 	}
-
-	public void doTurn(Action action) {
-		state = rules.applyAction(state, action);
-		if (!rules.isGameOver(state)) {
-			state = rules.applyRules(state);
-		}
+	
+	public Game() {
+		this(null);
+	}
+	
+	private void startNewGame() {
+		// state = GameStateFactory.getTestState1();
+		state = new GameStateFactory().getRandomState();
+		error = false;
 		updateState();
+	}
+
+	private void doTurn(Action action) {
+		if (!gameOver) {
+			state = rules.doTurn(state, action);
+			updateState();
+		}
 	}
 
 	private static Optional<Direction> findDirectionFromKey(KeyEvent e) {
@@ -101,9 +120,34 @@ public class SmartBeetle extends JFrame {
 	}
 
 	private void updateState() {
-		field.setGameState(state);
-		stats.setText("Ammo: " + state.getBeetle().getAmmo() + " Charge: "
+		gameOver = error || rules.isGameOver(state);
+		field.setGameState(state, gameOver);
+		stats.setText("Turn: " + state.getTurn() + " Ammo: " + state.getBeetle().getAmmo() + " Charge: "
 				+ state.getBeetle().getCharge());
+		runAiButton.setEnabled(!gameOver);
+	}
+	
+	private void runAi() {
+		try {
+			BeetleAi ai = aiClass.newInstance();
+			new Thread(() -> {
+				try {
+					ai.init(state);
+					while (!gameOver) {
+						doTurn(ai.turn(state));
+						Thread.sleep(100);
+					}
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				} catch (Exception e) {
+					e.printStackTrace();
+					error = true;
+					updateState();
+				}
+			}).start();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 	}
 
 }

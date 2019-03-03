@@ -1,5 +1,6 @@
 package com.iwolverton.smartbeetle.internal;
 
+import java.util.Arrays;
 import java.util.List;
 
 import com.iwolverton.smartbeetle.GameState;
@@ -12,10 +13,10 @@ import com.iwolverton.smartbeetle.elements.Spider;
 
 public class GameStateBuilder extends GameState {
 
-	public GameStateBuilder(List<ChargingPad> chargingPads, AntHill antHill,
+	public GameStateBuilder(int turn, List<ChargingPad> chargingPads, AntHill antHill,
 			List<Bead> beads, Beetle beetle, Spider spider,
 			List<FireAnt> fireAnts) {
-		super(chargingPads, antHill, beads, beetle, spider, fireAnts);
+		super(turn, chargingPads, antHill, beads, beetle, spider, fireAnts);
 	}
 
 	public GameStateBuilder(GameState from) {
@@ -24,6 +25,16 @@ public class GameStateBuilder extends GameState {
 	
 	public GameState build() {
 		return new GameState(this);
+	}
+
+	public GameStateBuilder setTurn(int turn) {
+		this.turn = turn;
+		return this;
+	}
+	
+	public GameStateBuilder incrementTurn() {
+		this.turn++;
+		return this;
 	}
 
 	public GameStateBuilder setChargingPads(List<ChargingPad> chargingPads) {
@@ -53,6 +64,11 @@ public class GameStateBuilder extends GameState {
 
 	public GameStateBuilder setFireAnts(List<FireAnt> fireAnts) {
 		this.fireAnts = fireAnts;
+		return this;
+	}
+	
+	public GameStateBuilder setFireAnts(FireAnt... fireAnts) {
+		this.fireAnts = Arrays.asList(fireAnts);
 		return this;
 	}
 

@@ -16,6 +16,14 @@ import com.iwolverton.smartbeetle.elements.FireAnt;
 import com.iwolverton.smartbeetle.elements.Spider;
 
 public class GameRules {
+	
+	public GameState doTurn(GameState state, Action action) {
+		state = applyAction(state, action);
+		if (!isGameOver(state)) {
+			state = applyRules(state);
+		}
+		return state;
+	}
 
 	public boolean isGameOver(GameState state) {
 		if (state.getBeetle().getCharge() <= 0 && !state.getChargingPads()
@@ -112,7 +120,7 @@ public class GameRules {
 		nextMove = hill.getNextMove() - 1;
 		if (nextMove == 0) {
 			if (!collisionDetector.isCollision(hill)) {
-				int nextFrequency = Math.max(hill.getFrequency() - 1, 1);
+				int nextFrequency = Math.max((int) (hill.getFrequency() * .95), 1);
 				hill = new AntHill(hill, nextFrequency, nextFrequency);
 				ants.add(new FireAnt(hill));
 			}
@@ -130,7 +138,7 @@ public class GameRules {
 			beads.add(new Bead(ammoCD.randCoordWithoutCollision()));
 		}
 
-		return new GameState(state.getChargingPads(), hill, beads,
+		return new GameState(state.getTurn() + 1, state.getChargingPads(), hill, beads,
 				beetle.build(), spider, ants);
 	}
 
