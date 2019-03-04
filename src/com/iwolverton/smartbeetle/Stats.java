@@ -37,8 +37,7 @@ public class Stats {
 
 	@Override
 	public String toString() {
-		return "Stats [best=" + best + ", worst=" + worst + ", average="
-				+ average + "]";
+		return String.format("Avg:%5s Best:%5s Worst%5s", average, best, worst);
 	}
 
 }

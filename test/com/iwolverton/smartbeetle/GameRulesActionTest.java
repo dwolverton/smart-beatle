@@ -34,7 +34,7 @@ public class GameRulesActionTest {
 		GameState end = rules.applyAction(start, Action.move(Direction.E));
 		assertEquals(11, end.getBeetle().getX());
 		assertEquals(10, end.getBeetle().getY());
-		assertEquals(49, end.getBeetle().getCharge());
+		assertEquals(48, end.getBeetle().getCharge());
 		assertEquals(1, end.getBeetle().getAmmo());
 	}
 	
@@ -58,7 +58,7 @@ public class GameRulesActionTest {
 		GameState end = rules.applyAction(start, Action.shoot(Direction.N));
 		assertEquals(17, end.getBeetle().getX());
 		assertEquals(5, end.getBeetle().getY());
-		assertEquals(49, end.getBeetle().getCharge());
+		assertEquals(48, end.getBeetle().getCharge());
 		assertEquals(0, end.getBeetle().getAmmo());
 		assertEquals(0, end.getAnts().size());
 	}
@@ -69,7 +69,7 @@ public class GameRulesActionTest {
 		GameState end = rules.applyAction(start, Action.shoot(Direction.E));
 		assertEquals(17, end.getBeetle().getX());
 		assertEquals(5, end.getBeetle().getY());
-		assertEquals(49, end.getBeetle().getCharge());
+		assertEquals(48, end.getBeetle().getCharge());
 		assertEquals(0, end.getBeetle().getAmmo());
 		assertEquals(start.getAnts(), end.getAnts());
 	}
@@ -80,7 +80,7 @@ public class GameRulesActionTest {
 		GameState end = rules.applyAction(start, Action.shoot(Direction.N));
 		assertEquals(17, end.getBeetle().getX());
 		assertEquals(5, end.getBeetle().getY());
-		assertEquals(49, end.getBeetle().getCharge());
+		assertEquals(48, end.getBeetle().getCharge());
 		assertEquals(0, end.getBeetle().getAmmo());
 		assertEquals(start.getAnts(), end.getAnts());
 	}
@@ -90,7 +90,7 @@ public class GameRulesActionTest {
 		GameState end = rules.applyAction(start, Action.stay());
 		assertEquals(10, end.getBeetle().getX());
 		assertEquals(10, end.getBeetle().getY());
-		assertEquals(49, end.getBeetle().getCharge());
+		assertEquals(48, end.getBeetle().getCharge());
 		assertEquals(1, end.getBeetle().getAmmo());
 	}
 

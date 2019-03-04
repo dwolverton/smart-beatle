@@ -7,6 +7,9 @@ public class ShootAction implements Action {
 	private Direction direction;
 
 	public ShootAction(Direction direction) {
+		if (direction == null) {
+			direction = Direction.NONE;
+		}
 		this.direction = direction;
 	}
 

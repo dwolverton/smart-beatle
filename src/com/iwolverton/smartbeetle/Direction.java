@@ -1,5 +1,10 @@
 package com.iwolverton.smartbeetle;
 
+/**
+ * Cardinal direction on the game board.
+ * <p>
+ * Note that in the game's coordinates,right (E) and down (S) are positive.
+ */
 public enum Direction {
 
 	N(0, -1, Axis.Y), E(1, 0, Axis.X), S(0, 1, Axis.Y), W(-1, 0,
@@ -14,22 +19,53 @@ public enum Direction {
 		this.axis = axis;
 	}
 
+	/**
+	 * x-axis component of the direction: either -1, 0, or 1
+	 */
 	public int getX() {
 		return x;
 	}
 
+	/**
+	 * y-axis component of the direction: either -1, 0, or 1
+	 */
 	public int getY() {
 		return y;
 	}
 
+	/**
+	 * whether this is an x-axis or y-axis direction
+	 */
 	public Axis getAxis() {
 		return axis;
 	}
+	
+	/**
+	 * on this direction's axis, is it positive or negative (1 or -1).
+	 */
+	public int getSign() {
+		switch (this) {
+		case N:
+		case E:
+			return 1;
+		case S:
+		case W:
+			return -1;
+		default:
+			return 0;
+		}
+	}
 
+	/**
+	 * Return the coordinate that is 1 unit of this direction from the given coordinate.
+	 */
 	public Coord apply(Coord coord) {
 		return new Coord(coord.getX() + x, coord.getY() + y);
 	}
 
+	/**
+	 * The opposite direction. E.g. N is the opposite of S.
+	 */
 	public Direction opposite() {
 		switch (this) {
 		case N:
@@ -45,6 +81,10 @@ public enum Direction {
 		}
 	}
 
+	/**
+	 * Get the direction that has the given sign on the given axis.
+	 * @param sign any number, only the sign (positive, negative or 0) will be taken into account.
+	 */
 	public static Direction forAxis(Axis axis, int sign) {
 		if (sign == 0) {
 			return NONE;
@@ -59,10 +99,18 @@ public enum Direction {
 		}
 	}
 	
+	/**
+	 * Get the direction that has the given sign on the x axis.
+	 * @param sign any number, only the sign (positive, negative or 0) will be taken into account.
+	 */
 	public static Direction forX(int sign) {
 		return forAxis(Axis.X, sign);
 	}
 	
+	/**
+	 * Get the direction that has the given sign on the y axis.
+	 * @param sign any number, only the sign (positive, negative or 0) will be taken into account.
+	 */
 	public static Direction forY(int sign) {
 		return forAxis(Axis.Y, sign);
 	}

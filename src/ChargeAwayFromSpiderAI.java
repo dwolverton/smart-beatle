@@ -1,6 +1,7 @@
 import com.iwolverton.smartbeetle.BeetleAi;
 import com.iwolverton.smartbeetle.Game;
 import com.iwolverton.smartbeetle.GameState;
+import com.iwolverton.smartbeetle.Settings;
 import com.iwolverton.smartbeetle.actions.Action;
 import com.iwolverton.smartbeetle.elements.ChargingPad;
 
@@ -13,7 +14,7 @@ public class ChargeAwayFromSpiderAI implements BeetleAi {
 	private ChargingPad pad;
 
 	@Override
-	public void init(GameState state) {
+	public void init(GameState state, Settings settings) {
 		pickPad(state);
 	}
 

@@ -53,13 +53,18 @@ public class GameRules {
 	}
 
 	public GameState applyAction(GameState state, Action action) {
+		if (action instanceof MoveAction && ((MoveAction) action).getDirection() == Direction.NONE) {
+			// normalize the stay action
+			action = null;
+		}
+		
 		BeetleBuilder beetle = new BeetleBuilder(state.getBeetle());
-		beetle.addCharge(-1, settings.getBeetleMaxCharge());
 		if (action instanceof MoveAction) {
 			MoveAction a = (MoveAction) action;
 			Coord dest = a.getDirection().apply(beetle);
 			ensureInBounds(dest);
 			beetle.setCoord(dest);
+			beetle.addCharge(-settings.getChargeCostToMove(), settings.getBeetleMaxCharge());
 
 			return new GameState(state, beetle.build());
 		} else if (action instanceof ShootAction && beetle.getAmmo() > 0) {
@@ -68,9 +73,11 @@ public class GameRules {
 			List<Ant> ants = state.getAnts().stream()
 					.filter(ant -> !ant.isAt(target))
 					.collect(Collectors.toList());
+			beetle.addCharge(-settings.getChargeCostToShoot(), settings.getBeetleMaxCharge());
 
 			return new GameState(state, beetle.build(), ants);
 		} else {
+			beetle.addCharge(-settings.getChargeCostToStay(), settings.getBeetleMaxCharge());
 			return new GameState(state, beetle.build());
 		}
 	}
@@ -90,7 +97,7 @@ public class GameRules {
 		BeetleBuilder beetle = new BeetleBuilder(state.getBeetle());
 
 		if (state.getChargingPads().stream().anyMatch(beetle::isAt)) {
-			beetle.addCharge(4, settings.getBeetleMaxCharge());
+			beetle.addCharge(settings.getRecharge(), settings.getBeetleMaxCharge());
 		}
 
 		List<Bead> beads = state.getBeads().stream()
@@ -138,7 +145,7 @@ public class GameRules {
 			hill = new AntHill(hill, nextMove, hill.getFrequency());
 		}
 
-		if (beetle.getAmmo() + beads.size() < 4) {
+		if (beetle.getAmmo() + beads.size() < settings.getTotalAmmo()) {
 			// place additional bead
 			CollisionDetector ammoCD = new CollisionDetector()
 					.add(state.getChargingPads()).add(beads).add(beetle);

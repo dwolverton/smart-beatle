@@ -12,7 +12,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.iwolverton.smartbeetle.actions.Action;
-import com.iwolverton.smartbeetle.internal.AiStatsRunner;
 import com.iwolverton.smartbeetle.internal.GameFieldPanel;
 import com.iwolverton.smartbeetle.internal.GameRules;
 import com.iwolverton.smartbeetle.internal.GameStateFactory;
@@ -153,7 +152,7 @@ public class Game extends JFrame {
 				BeetleAi ai = aiClass.newInstance();
 				aiThread = new Thread(() -> {
 					try {
-						ai.init(state);
+						ai.init(state, settings);
 						// NOTE: if aiThread is set to null or a new thread has started, stop this one.
 						while (!gameOver && Thread.currentThread() == aiThread) {
 							doTurn(ai.turn(state));

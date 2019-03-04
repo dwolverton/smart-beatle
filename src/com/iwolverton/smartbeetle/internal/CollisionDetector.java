@@ -37,7 +37,7 @@ public class CollisionDetector {
 	public Coord randCoordWithoutCollision() {
 		Coord c;
 		do {
-			c = GameStateFactory.randCoord();
+			c = Coord.randCoord();
 		} while (isCollision(c));
 		return c;
 	}

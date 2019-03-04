@@ -7,6 +7,9 @@ public class MoveAction implements Action {
 	private Direction direction;
 
 	public MoveAction(Direction direction) {
+		if (direction == null) {
+			direction = Direction.NONE;
+		}
 		this.direction = direction;
 	}
 

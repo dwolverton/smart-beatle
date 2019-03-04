@@ -13,7 +13,7 @@ public interface Action {
 	}
 	
 	public static Action stay() {
-		return null;
+		return new MoveAction(Direction.NONE);
 	}
 
 }
