@@ -48,7 +48,7 @@ public class Coord {
 	
 	public Direction directionTo(Coord other) {
 		if (x == other.x && y == other.y) {
-			return Direction.X;
+			return Direction.NONE;
 		}
 		int xDiff = other.getX() - x;
 		int yDiff = other.getY() - y;
@@ -61,7 +61,7 @@ public class Coord {
 	
 	public Direction altDirectionTo(Coord other) {
 		if (x == other.x && y == other.y) {
-			return Direction.X;
+			return Direction.NONE;
 		}
 		int xDiff = other.getX() - x;
 		int yDiff = other.getY() - y;

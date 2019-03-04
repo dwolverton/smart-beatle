@@ -11,7 +11,7 @@ import com.iwolverton.smartbeetle.elements.AntHill;
 import com.iwolverton.smartbeetle.elements.Bead;
 import com.iwolverton.smartbeetle.elements.Beetle;
 import com.iwolverton.smartbeetle.elements.ChargingPad;
-import com.iwolverton.smartbeetle.elements.FireAnt;
+import com.iwolverton.smartbeetle.elements.Ant;
 import com.iwolverton.smartbeetle.elements.Spider;
 import com.iwolverton.smartbeetle.internal.GameRules;
 
@@ -20,14 +20,14 @@ public class GameRulesActionTest {
 	GameState start = new GameState(
 			0,
 			Arrays.asList(new ChargingPad(3, 3), new ChargingPad(16, 17)),
-			new AntHill(17, 4),
+			new AntHill(new Coord(17, 4), 10, 10),
 			Arrays.asList(new Bead(6, 8), new Bead(14, 8), new Bead(10, 15)),
-			new Beetle(10, 10, 50, 1),
-			new Spider(0, 19),
-			Arrays.asList(new FireAnt(17, 4))
+			new Beetle(new Coord(10, 10), 50, 1),
+			new Spider(0, 19, 3),
+			Arrays.asList(new Ant(17, 4))
 	);
 	
-	GameRules rules = new GameRules();
+	GameRules rules = GameRules.withDefaultSettings();
 	
 	@Test
 	void testMove() {
@@ -40,14 +40,14 @@ public class GameRulesActionTest {
 	
 	@Test
 	void testMoveOutOfBoundsMaxX() {
-		start = new GameState(start, new Beetle(19, 5));
+		start = new GameState(start, new Beetle(new Coord(19, 5), 50, 1));
 		assertThrows(RuntimeException.class, () ->
 				rules.applyAction(start, Action.move(Direction.E)));
 	}
 	
 	@Test
 	void testMoveOutOfBoundsMinX() {
-		start = new GameState(start, new Beetle(0, 5));
+		start = new GameState(start, new Beetle(new Coord(0, 5), 50, 1));
 		assertThrows(RuntimeException.class, () ->
 				rules.applyAction(start, Action.move(Direction.W)));
 	}
@@ -60,7 +60,7 @@ public class GameRulesActionTest {
 		assertEquals(5, end.getBeetle().getY());
 		assertEquals(49, end.getBeetle().getCharge());
 		assertEquals(0, end.getBeetle().getAmmo());
-		assertEquals(0, end.getFireAnts().size());
+		assertEquals(0, end.getAnts().size());
 	}
 	
 	@Test
@@ -71,7 +71,7 @@ public class GameRulesActionTest {
 		assertEquals(5, end.getBeetle().getY());
 		assertEquals(49, end.getBeetle().getCharge());
 		assertEquals(0, end.getBeetle().getAmmo());
-		assertEquals(start.getFireAnts(), end.getFireAnts());
+		assertEquals(start.getAnts(), end.getAnts());
 	}
 	
 	@Test
@@ -82,7 +82,7 @@ public class GameRulesActionTest {
 		assertEquals(5, end.getBeetle().getY());
 		assertEquals(49, end.getBeetle().getCharge());
 		assertEquals(0, end.getBeetle().getAmmo());
-		assertEquals(start.getFireAnts(), end.getFireAnts());
+		assertEquals(start.getAnts(), end.getAnts());
 	}
 	
 	@Test

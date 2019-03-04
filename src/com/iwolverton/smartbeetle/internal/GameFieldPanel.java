@@ -64,7 +64,7 @@ public class GameFieldPanel extends JPanel {
 		drawEach(state.getBeads());
 		state.getBeetle().draw(dp);
 		state.getSpider().draw(dp);
-		drawEach(state.getFireAnts());
+		drawEach(state.getAnts());
 	}
 
 	private void drawEach(Iterable<? extends GameElement> elements) {

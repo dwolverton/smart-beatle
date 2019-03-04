@@ -34,12 +34,12 @@ public class BeetleBuilder extends Beetle {
 		return this;
 	}
 	
-	public BeetleBuilder addCharge(int change) {
+	public BeetleBuilder addCharge(int change, int max) {
 		this.charge += change;
 		if (charge < 0) {
 			charge = 0;
-		} else if (charge > MAX_CHARGE) {
-			charge = MAX_CHARGE;
+		} else if (charge > max) {
+			charge = max;
 		}
 		return this;
 	}

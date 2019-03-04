@@ -8,7 +8,7 @@ import com.iwolverton.smartbeetle.elements.AntHill;
 import com.iwolverton.smartbeetle.elements.Bead;
 import com.iwolverton.smartbeetle.elements.Beetle;
 import com.iwolverton.smartbeetle.elements.ChargingPad;
-import com.iwolverton.smartbeetle.elements.FireAnt;
+import com.iwolverton.smartbeetle.elements.Ant;
 import com.iwolverton.smartbeetle.elements.GameElement;
 import com.iwolverton.smartbeetle.elements.Spider;
 
@@ -22,22 +22,22 @@ public class GameState {
 	protected List<Bead> beads;
 	protected Beetle beetle;
 	protected Spider spider;
-	protected List<FireAnt> fireAnts;
+	protected List<Ant> ants;
 
 	public GameState(int turn, List<ChargingPad> chargingPads, AntHill antHill,
 			List<Bead> beads, Beetle beetle, Spider spider,
-			List<FireAnt> fireAnts) {
+			List<Ant> ants) {
 		this.turn = turn;
 		this.chargingPads = chargingPads;
 		this.antHill = antHill;
 		this.beads = beads;
 		this.beetle = beetle;
 		this.spider = spider;
-		this.fireAnts = fireAnts;
+		this.ants = ants;
 	}
 	
 	public GameState(GameState from) {
-		this(from.turn, from.chargingPads, from.antHill, from.beads, from.beetle, from.spider, from.fireAnts);
+		this(from.turn, from.chargingPads, from.antHill, from.beads, from.beetle, from.spider, from.ants);
 	}
 	
 	public GameState(GameState from, Beetle beetle) {
@@ -45,10 +45,10 @@ public class GameState {
 		this.beetle = beetle;
 	}
 	
-	public GameState(GameState from, Beetle beetle, List<FireAnt> fireAnts) {
+	public GameState(GameState from, Beetle beetle, List<Ant> ants) {
 		this(from);
 		this.beetle = beetle;
-		this.fireAnts = fireAnts;
+		this.ants = ants;
 	}
 	
 	public int getTurn() {
@@ -75,8 +75,8 @@ public class GameState {
 		return spider;
 	}
 
-	public List<FireAnt> getFireAnts() {
-		return Collections.unmodifiableList(fireAnts);
+	public List<Ant> getAnts() {
+		return Collections.unmodifiableList(ants);
 	}
 
 	public ActingElement getPlayerAt(int x, int y) {
@@ -86,7 +86,7 @@ public class GameState {
 		if (spider.isAt(x, y)) {
 			return spider;
 		}
-		for (ActingElement el : fireAnts) {
+		for (ActingElement el : ants) {
 			if (el.isAt(x, y)) {
 				return el;
 			}

@@ -5,20 +5,20 @@ import java.awt.Color;
 import com.iwolverton.smartbeetle.Coord;
 import com.iwolverton.smartbeetle.internal.DrawingParams;
 
-public class FireAnt extends ActingElement {
+public class Ant extends ActingElement {
 	
-	public static final int DEFAULT_FREQUENCY = 1;
+	public static final int FREQUENCY = 1;
 	private static final Color COLOR = new Color(0xff3300);
 
-	public FireAnt(int x, int y, int nextMove) {
+	public Ant(int x, int y, int nextMove) {
 		super(x, y, nextMove);
 	}
 	
-	public FireAnt(int x, int y) {
-		super(x, y, DEFAULT_FREQUENCY);
+	public Ant(int x, int y) {
+		super(x, y, FREQUENCY);
 	}
 	
-	public FireAnt(Coord coord) {
+	public Ant(Coord coord) {
 		this(coord.getX(), coord.getY());
 	}
 	

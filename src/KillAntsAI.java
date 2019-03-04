@@ -5,7 +5,7 @@ import com.iwolverton.smartbeetle.Game;
 import com.iwolverton.smartbeetle.GameState;
 import com.iwolverton.smartbeetle.actions.Action;
 import com.iwolverton.smartbeetle.elements.ChargingPad;
-import com.iwolverton.smartbeetle.elements.FireAnt;
+import com.iwolverton.smartbeetle.elements.Ant;
 
 public class KillAntsAI implements BeetleAi {
 	
@@ -23,7 +23,7 @@ public class KillAntsAI implements BeetleAi {
 	@Override
 	public Action turn(GameState state) {
 		if (state.getBeetle().getAmmo() != 0) {
-			for (FireAnt ant : state.getFireAnts()) {
+			for (Ant ant : state.getAnts()) {
 				if (ant.rightAngleDistanceFrom(state.getBeetle()) == 1) {
 					return Action.shoot(state.getBeetle().directionTo(ant));
 				} else if (ant.diagonalDistanceFrom(state.getBeetle()) == 1) {
@@ -38,7 +38,7 @@ public class KillAntsAI implements BeetleAi {
 		
 		Direction dir = state.getBeetle().directionTo(pad);
 		Coord dest = dir.apply(state.getBeetle());
-		if (dest.diagonalDistanceFrom(state.getSpider()) < 2 || state.getPlayerAt(dest) instanceof FireAnt) {
+		if (dest.diagonalDistanceFrom(state.getSpider()) < 2 || state.getPlayerAt(dest) instanceof Ant) {
 			dir = state.getBeetle().altDirectionTo(pad);
 			if (dest.isAt(state.getSpider())) {
 				// yet do not run into the spider

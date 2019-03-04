@@ -8,9 +8,11 @@ import java.util.Optional;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import com.iwolverton.smartbeetle.actions.Action;
+import com.iwolverton.smartbeetle.internal.AiStatsRunner;
 import com.iwolverton.smartbeetle.internal.GameFieldPanel;
 import com.iwolverton.smartbeetle.internal.GameRules;
 import com.iwolverton.smartbeetle.internal.GameStateFactory;
@@ -25,14 +27,18 @@ public class Game extends JFrame {
 	private JButton runAiButton = new JButton("Run AI");
 	private JButton newGameButton = new JButton("New Game");
 	
-	private GameRules rules = new GameRules();
+	private Settings settings;
+	private GameRules rules;
 	private GameState state;
 	private boolean error;
 	private boolean gameOver;
 	private Class<? extends BeetleAi> aiClass;
+	private Thread aiThread;
 
-	public Game(Class<? extends BeetleAi> aiClass) {
+	public Game(Class<? extends BeetleAi> aiClass, Settings settings) {
 		this.aiClass = aiClass;
+		this.settings = settings;
+		this.rules = new GameRules(settings);
 		
 		setTitle("Smart Beetle");
 		setSize(540, 540);
@@ -42,6 +48,7 @@ public class Game extends JFrame {
 		
 		newGameButton.addActionListener(e -> startNewGame());
 		runAiButton.addActionListener(e -> runAi());
+		scoreAiButton.addActionListener(e -> runStats());
 
 		JPanel bar = new JPanel();
 		if (aiClass != null) {
@@ -87,13 +94,23 @@ public class Game extends JFrame {
 	}
 	
 	public Game() {
-		this(null);
+		this(null, new Settings());
+	}
+	
+	public Game(Class<? extends BeetleAi> aiClass) {
+		this(aiClass, new Settings());
+	}
+	
+	public Game(Settings settings) {
+		this(null, settings);
 	}
 	
 	private void startNewGame() {
 		// state = GameStateFactory.getTestState1();
-		state = new GameStateFactory().getRandomState();
+		state = new GameStateFactory(settings).getRandomState();
 		error = false;
+		aiThread = null;
+		runAiButton.setText("Run AI");
 		updateState();
 	}
 
@@ -128,26 +145,40 @@ public class Game extends JFrame {
 	}
 	
 	private void runAi() {
-		try {
-			BeetleAi ai = aiClass.newInstance();
-			new Thread(() -> {
-				try {
-					ai.init(state);
-					while (!gameOver) {
-						doTurn(ai.turn(state));
-						Thread.sleep(100);
+		if (aiThread != null) {
+			aiThread = null;
+			runAiButton.setText("Run AI");
+		} else {
+			try {
+				BeetleAi ai = aiClass.newInstance();
+				aiThread = new Thread(() -> {
+					try {
+						ai.init(state);
+						// NOTE: if aiThread is set to null or a new thread has started, stop this one.
+						while (!gameOver && Thread.currentThread() == aiThread) {
+							doTurn(ai.turn(state));
+							Thread.sleep(100);
+						}
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					} catch (Exception e) {
+						e.printStackTrace();
+						error = true;
+						updateState();
 					}
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				} catch (Exception e) {
-					e.printStackTrace();
-					error = true;
-					updateState();
-				}
-			}).start();
-		} catch (Exception ex) {
-			ex.printStackTrace();
+				});
+				runAiButton.setText("Stop AI");
+				aiThread.start();
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
 		}
+	}
+	
+	private void runStats() {
+		Stats stats = AiStatsRunner.runAiStats(aiClass, settings);
+		JOptionPane.showMessageDialog(this, "Average: " + stats.getAverage()
+				+ " Best: " + stats.getBest() + " Worst: " + stats.getWorst());
 	}
 
 }

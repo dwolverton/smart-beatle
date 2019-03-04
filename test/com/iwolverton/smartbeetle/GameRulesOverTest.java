@@ -11,7 +11,7 @@ import com.iwolverton.smartbeetle.elements.AntHill;
 import com.iwolverton.smartbeetle.elements.Bead;
 import com.iwolverton.smartbeetle.elements.Beetle;
 import com.iwolverton.smartbeetle.elements.ChargingPad;
-import com.iwolverton.smartbeetle.elements.FireAnt;
+import com.iwolverton.smartbeetle.elements.Ant;
 import com.iwolverton.smartbeetle.elements.Spider;
 import com.iwolverton.smartbeetle.internal.GameRules;
 
@@ -20,14 +20,14 @@ public class GameRulesOverTest {
 	GameState state = new GameState(
 			0,
 			Arrays.asList(new ChargingPad(3, 3), new ChargingPad(16, 17)),
-			new AntHill(17, 4),
+			new AntHill(17, 4, 10, 10),
 			Arrays.asList(new Bead(6, 8), new Bead(14, 8), new Bead(10, 15)),
-			new Beetle(10, 10),
-			new Spider(0, 19),
-			Arrays.asList(new FireAnt(17, 4))
+			new Beetle(new Coord(10, 10), 50, 1),
+			new Spider(0, 19, 3),
+			Arrays.asList(new Ant(17, 4))
 	);
 	
-	GameRules rules = new GameRules();
+	GameRules rules = GameRules.withDefaultSettings();
 	
 	@Test
 	void noCharge() {
