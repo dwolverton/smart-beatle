@@ -1,16 +1,15 @@
+package com.iwolverton.smartbeetle.sample;
 import com.iwolverton.smartbeetle.BeetleAi;
-import com.iwolverton.smartbeetle.Coord;
-import com.iwolverton.smartbeetle.Direction;
 import com.iwolverton.smartbeetle.Game;
 import com.iwolverton.smartbeetle.GameState;
 import com.iwolverton.smartbeetle.Settings;
 import com.iwolverton.smartbeetle.actions.Action;
 import com.iwolverton.smartbeetle.elements.ChargingPad;
 
-public class ChargeAwayFromSpiderAI2 implements BeetleAi {
+public class ChargeAwayFromSpiderAi implements BeetleAi {
 	
 	public static void main(String[] args) {
-		new Game(ChargeAwayFromSpiderAI2.class);
+		new Game(ChargeAwayFromSpiderAi.class);
 	}
 	
 	private ChargingPad pad;
@@ -26,13 +25,7 @@ public class ChargeAwayFromSpiderAI2 implements BeetleAi {
 			pickPad(state);
 		}
 		
-		Direction dir = state.getBeetle().directionTo(pad);
-		Coord dest = dir.apply(state.getBeetle());
-		if (dest.diagonalDistanceFrom(state.getSpider()) < 2) {
-			dir = state.getBeetle().altDirectionTo(pad);
-		}
-		
-		return Action.move(dir);
+		return Action.move(state.getBeetle().directionTo(pad));
 	}
 		
 	private void pickPad(GameState state) {

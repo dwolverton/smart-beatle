@@ -1,3 +1,4 @@
+package com.iwolverton.smartbeetle.sample;
 import com.iwolverton.smartbeetle.BeetleAi;
 import com.iwolverton.smartbeetle.Game;
 import com.iwolverton.smartbeetle.GameState;

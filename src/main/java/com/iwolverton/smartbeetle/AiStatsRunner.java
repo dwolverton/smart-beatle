@@ -1,5 +1,8 @@
 package com.iwolverton.smartbeetle;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.iwolverton.smartbeetle.actions.Action;
 import com.iwolverton.smartbeetle.internal.GameRules;
 import com.iwolverton.smartbeetle.internal.GameStateFactory;
@@ -30,7 +33,7 @@ public class AiStatsRunner {
 		
 		int average = (int) Math.round((double) total / GAME_COUNT);
 		
-		return new Stats(best, worst, average);
+		return new Stats(aiClass, best, worst, average);
 	}
 
 	/**
@@ -49,6 +52,9 @@ public class AiStatsRunner {
 				state = rules.doTurn(state, action);
 			}
 		} catch (Exception ex) {
+			if (aiClass != null) {
+				System.err.println("The following exception occurred with AI " + aiClass.getName());
+			}
 			ex.printStackTrace();
 		}
 		return state.getTurn();
@@ -58,11 +64,12 @@ public class AiStatsRunner {
 	 * Run given AIs repeatedly and print comparative survival statistics.
 	 */
 	@SafeVarargs
-	public static void runAndCompareAis(Settings settings, Class<? extends BeetleAi>... aiClasses) {
+	public static List<Stats> runAndCompareAis(Settings settings, Class<? extends BeetleAi>... aiClasses) {
+		List<Stats> statses = new ArrayList<>(aiClasses.length);
 		for (Class<? extends BeetleAi> aiClass : aiClasses) {
-			Stats stats = runAiStats(aiClass, settings);
-			System.out.println(stats + " " + aiClass.getSimpleName());
+			statses.add(runAiStats(aiClass, settings));
 		}
+		return statses;
 	}
 
 }

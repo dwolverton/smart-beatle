@@ -1,3 +1,4 @@
+package com.iwolverton.smartbeetle.sample;
 import com.iwolverton.smartbeetle.BeetleAi;
 import com.iwolverton.smartbeetle.Coord;
 import com.iwolverton.smartbeetle.Direction;
@@ -8,10 +9,10 @@ import com.iwolverton.smartbeetle.actions.Action;
 import com.iwolverton.smartbeetle.elements.Ant;
 import com.iwolverton.smartbeetle.elements.ChargingPad;
 
-public class KillAntsAI implements BeetleAi {
+public class KillAntsAi implements BeetleAi {
 	
 	public static void main(String[] args) {
-		new Game(KillAntsAI.class);
+		new Game(KillAntsAi.class);
 	}
 	
 	private ChargingPad pad;

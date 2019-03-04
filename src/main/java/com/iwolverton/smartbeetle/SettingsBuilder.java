@@ -1,5 +1,9 @@
 package com.iwolverton.smartbeetle;
 
+/**
+ * Since the Settings class is immutable. This builder is provided
+ * to make it easy to tweak the settings before starting a game.
+ */
 public class SettingsBuilder extends Settings {
 
 	public SettingsBuilder() {}
