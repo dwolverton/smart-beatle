@@ -12,6 +12,9 @@ import com.iwolverton.smartbeetle.elements.Ant;
 import com.iwolverton.smartbeetle.elements.GameElement;
 import com.iwolverton.smartbeetle.elements.Spider;
 
+/**
+ * The current state of the game at a given point in time.
+ */
 public class GameState {
 
 	public static final int FIELD_DIMENSION = 20;
@@ -51,34 +54,71 @@ public class GameState {
 		this.ants = ants;
 	}
 	
+	/**
+	 * Number of turns completed.
+	 */
 	public int getTurn() {
 		return turn;
 	}
 
+	/**
+	 * A list of exactly 2 charging pads. The beetle receives charge when
+	 * it ends its turn on one of these.
+	 */
 	public List<ChargingPad> getChargingPads() {
 		return Collections.unmodifiableList(chargingPads);
 	}
 
+	/**
+	 * The ant hill. Ants periodically appear from this hill. The frequency
+	 * increases as the game goes on. Check its <code>nextMove</code> property
+	 * to see how many turns until the next ant--one means it will be this turn,
+	 * immediately after the beetle's action.
+	 */
 	public AntHill getAntHill() {
 		return antHill;
 	}
 
+	/**
+	 * The beetle can collect beads to be used as ammunition against ants.
+	 */
 	public List<Bead> getBeads() {
 		return Collections.unmodifiableList(beads);
 	}
 
+	/**
+	 * Our protagonist, a robotic beetle that must keeps its battery charged
+	 * while fighting off ants and avoiding the spider.
+	 */
 	public Beetle getBeetle() {
 		return beetle;
 	}
 
+	/**
+	 * The spider is unstoppable, but slow. It doesn't move every turn. Check
+	 * its <code>nextMove</code> property to see how many turns until it moves
+	 * again--one means it will be this turn, immediately after the beetle's action.
+	 */
 	public Spider getSpider() {
 		return spider;
 	}
 
+	/**
+	 * Ants always move toward the beetle. They move one space per turn, just like
+	 * the beetle. They can be stopped by shooting beads (ammo) at them, but
+	 * only when they are directly adjacent to the beetle in one of the four
+	 * cardinal directions.
+	 * <p>
+	 * Ants spawn from the ant hill at intervals.
+	 */
 	public List<Ant> getAnts() {
 		return Collections.unmodifiableList(ants);
 	}
 
+	/**
+	 * Returns the beetle, spider, or ant at the given coordinate. No
+	 * two of these are allowed to be in the same space at the same time.
+	 */
 	public ActingElement getPlayerAt(int x, int y) {
 		if (beetle.isAt(x, y)) {
 			return beetle;
@@ -94,10 +134,18 @@ public class GameState {
 		return null;
 	}
 
+	/**
+	 * Returns the beetle, spider, or ant at the given coordinate. No
+	 * two of these are allowed to be in the same space at the same time.
+	 */
 	public ActingElement getPlayerAt(Coord coordinate) {
 		return getPlayerAt(coordinate.getX(), coordinate.getY());
 	}
 
+	/**
+	 * Returns the charging pad, ant hill, or bead at the given coordinate. No
+	 * two of these are allowed to be in the same space at the same time.
+	 */
 	public GameElement getNonPlayerAt(int x, int y) {
 		if (antHill.isAt(x, y)) {
 			return antHill;
@@ -115,6 +163,10 @@ public class GameState {
 		return null;
 	}
 
+	/**
+	 * Returns the charging pad, ant hill, or bead at the given coordinate. No
+	 * two of these are allowed to be in the same space at the same time.
+	 */
 	public GameElement getNonPlayerAt(Coord coordinate) {
 		return getNonPlayerAt(coordinate.getX(), coordinate.getY());
 	}

@@ -16,6 +16,10 @@ import com.iwolverton.smartbeetle.internal.GameFieldPanel;
 import com.iwolverton.smartbeetle.internal.GameRules;
 import com.iwolverton.smartbeetle.internal.GameStateFactory;
 
+/**
+ * Visual game runner. The visual opens automatically when this class
+ * is instantiated.
+ */
 public class Game extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -34,6 +38,9 @@ public class Game extends JFrame {
 	private Class<? extends BeetleAi> aiClass;
 	private Thread aiThread;
 
+	/**
+	 * Run visual game with given AI and settings.
+	 */
 	public Game(Class<? extends BeetleAi> aiClass, Settings settings) {
 		this.aiClass = aiClass;
 		this.settings = settings;
@@ -92,14 +99,23 @@ public class Game extends JFrame {
 		setVisible(true);
 	}
 	
+	/**
+	 * Run visual game with no AI and default settings.
+	 */
 	public Game() {
 		this(null, new Settings());
 	}
 	
+	/**
+	 * Run visual game with given AI and default settings.
+	 */
 	public Game(Class<? extends BeetleAi> aiClass) {
 		this(aiClass, new Settings());
 	}
 	
+	/**
+	 * Run visual game with no AI and default settings.
+	 */
 	public Game(Settings settings) {
 		this(null, settings);
 	}
