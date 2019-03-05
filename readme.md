@@ -4,6 +4,11 @@ Smart Little Beetle is a programming game that provides an environment for build
 
 ## Getting Started
 #### 1. Download and install the JARs.
+1. [smartbeetle-0.1-SNAPSHOT.jar](https://github.com/dwolverton/smart-beetle/blob/master/smartbeetle-0.1-SNAPSHOT.jar?raw=true)
+2. [smartbeetle-0.1-SNAPSHOT-javadoc.jar](https://github.com/dwolverton/smart-beetle/blob/master/smartbeetle-0.1-SNAPSHOT-javadoc.jar?raw=true)
+
+
+
 
 #### 2. Create an AI
 An AI is a class that implements the `BeetleAi` interface. It must also have a default or no-arg constructor.
@@ -94,9 +99,9 @@ Your job is to implement the `turn` method. It is called at the beginning of eve
 
 You can explore the `GameState` object to see what information it provides. Here are some other classes that are useful to be familiar with:
 
-* `Coord` An x, y coordinate pair. Coord also serves as the base class for all game elements, which means that each game element has all of Coord's methods (inheritance) and can be used anywhere a Coord is called for (polymorphism).
+* [`Coord`](https://dwolverton.github.io/smart-beetle/com/iwolverton/smartbeetle/Coord.html) An x, y coordinate pair. Coord also serves as the base class for all game elements, which means that each game element has all of Coord's methods (inheritance) and can be used anywhere a Coord is called for (polymorphism).
   * `Coord` has many useful methods, such as `	rightAngleDistanceFrom` for measuring distance, `directionTo​` for finding direction toward an element, and `isAt` to see if you're going to run into something.
-* `Direction` An enum of the cardinal directions. It has several useful methods, too, such as `relativeTo` which finds the coordinate this direction of another element or coordinate. There is also a `NONE` direction, which just stays put.
+* [`Direction`](https://dwolverton.github.io/smart-beetle/com/iwolverton/smartbeetle/Direction.html) An enum of the cardinal directions. It has several useful methods, too, such as `relativeTo` which finds the coordinate this direction of another element or coordinate. There is also a `NONE` direction, which just stays put.
 
 To give an example, here's an AI that moves toward the nearest charging pad.
 
@@ -121,7 +126,7 @@ public Action turn(GameState state) {
 
 It is also possible keep variables on your AI. A new instance of your AI class is created at the beginning of each game and reused for each turn.
 
-Additionally, your AI can optionally implement the `init` method which is called just once before the first turn. It includes the initial board state and the game settings. The game `Settings` let you know the exact specs various aspects of the game such as maximum charge of your beetle, how fast the spider is, and how often ants will come.
+Additionally, your AI can optionally implement the `init` method which is called just once before the first turn. It includes the initial board state and the game settings. The game [`Settings`](https://dwolverton.github.io/smart-beetle/com/iwolverton/smartbeetle/Settings.html#method.summary) let you know the exact specs various aspects of the game such as maximum charge of your beetle, how fast the spider is, and how often ants will come.
 
 Here's an example of an AI that uses `init` and also keeps track of information between turns.
 
@@ -129,19 +134,19 @@ Here's an example of an AI that uses `init` and also keeps track of information 
 public class RunInCirclesAi implements BeetleAi {
 	
 	private Direction direction;
-	private int distance;
+	private int count;
 
 	@Override
 	public void init(GameState state, Settings settings) {
 		// set initial direction toward middle
 		direction = state.getBeetle().directionTo(new Coord(10, 10));
-		distance = 3;
+		count = 0;
 	}
 
 	@Override
 	public Action turn(GameState state) {
-		if (--distance == 0) {
-			distance = 3;
+		if (count++ == 3) {
+			count = 1;
 			direction = direction.nextClockwise();
 		}
 		return Action.move(direction);
@@ -149,3 +154,8 @@ public class RunInCirclesAi implements BeetleAi {
 
 }
 ```
+
+Find the more docs on the code [here](https://dwolverton.github.io/smart-beetle/).
+
+### Advanced...
+You can 

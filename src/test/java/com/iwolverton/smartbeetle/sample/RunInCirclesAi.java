@@ -13,23 +13,23 @@ public class RunInCirclesAi implements BeetleAi {
 		new Game(RunInCirclesAi.class);
 	}
 	
-	private Direction direction;
-	private int distance;
+    private Direction direction;
+    private int count;
 
-	@Override
-	public void init(GameState state, Settings settings) {
-		// set initial direction toward middle
-		direction = state.getBeetle().directionTo(new Coord(10, 10));
-		distance = 3;
-	}
+    @Override
+    public void init(GameState state, Settings settings) {
+        // set initial direction toward middle
+        direction = state.getBeetle().directionTo(new Coord(10, 10));
+        count = 0;
+    }
 
-	@Override
-	public Action turn(GameState state) {
-		if (--distance == 0) {
-			distance = 3;
-			direction = direction.nextClockwise();
-		}
-		return Action.move(direction);
-	}
+    @Override
+    public Action turn(GameState state) {
+        if (count++ == 3) {
+            count = 1;
+            direction = direction.nextClockwise();
+        }
+        return Action.move(direction);
+    }
 
 }

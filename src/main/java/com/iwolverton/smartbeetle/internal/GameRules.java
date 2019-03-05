@@ -37,19 +37,23 @@ public class GameRules {
 	}
 
 	public boolean isGameOver(GameState state) {
+		return determineCauseOfDeath(state) != null;
+	}
+	
+	public String determineCauseOfDeath(GameState state) {
 		if (state.getBeetle().getCharge() <= 0 && !state.getChargingPads()
 				.stream().anyMatch(state.getBeetle()::isAt)) {
-			return true;
+			return "Charge";
 		}
 		if (state.getSpider().isAt(state.getBeetle())) {
-			return true;
+			return "Spider";
 		}
 		for (Ant ant : state.getAnts()) {
 			if (ant.isAt(state.getBeetle())) {
-				return true;
+				return "Ant";
 			}
 		}
-		return false;
+		return null;
 	}
 
 	public GameState applyAction(GameState state, Action action) {

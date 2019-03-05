@@ -12,7 +12,7 @@ import com.iwolverton.smartbeetle.internal.GameStateFactory;
  */
 public class AiStatsRunner {
 	
-	private static final int GAME_COUNT = 100;
+	private static final int GAME_COUNT = 50;
 
 	/**
 	 * Run given AI repeatedly and collect survival statistics.
