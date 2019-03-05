@@ -28,7 +28,7 @@ public class ChargeAwayFromSpiderAi2 implements BeetleAi {
 		}
 		
 		Direction dir = state.getBeetle().directionTo(pad);
-		Coord dest = dir.apply(state.getBeetle());
+		Coord dest = dir.relativeTo(state.getBeetle());
 		if (dest.diagonalDistanceFrom(state.getSpider()) < 2) {
 			dir = state.getBeetle().altDirectionTo(pad);
 		}

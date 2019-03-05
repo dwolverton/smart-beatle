@@ -81,7 +81,7 @@ public class Settings {
 
 	/**
 	 * The total amount of bead + ammo in the game. When ammo is used
-	 * it appears immediately as beads on the board.
+	 * it appears immediately as beads on the field.
 	 */
 	public int getTotalAmmo() {
 		return totalAmmo;

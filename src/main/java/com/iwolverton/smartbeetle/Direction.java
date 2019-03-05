@@ -1,7 +1,7 @@
 package com.iwolverton.smartbeetle;
 
 /**
- * Cardinal direction on the game board.
+ * Cardinal direction on the game field.
  * <p>
  * Note that in the game's coordinates,right (E) and down (S) are positive.
  */
@@ -59,8 +59,15 @@ public enum Direction {
 	/**
 	 * Return the coordinate that is 1 unit of this direction from the given coordinate.
 	 */
-	public Coord apply(Coord coord) {
+	public Coord relativeTo(Coord coord) {
 		return new Coord(coord.getX() + x, coord.getY() + y);
+	}
+	
+	/**
+	 * Return the coordinate that is dist units of this direction from the given coordinate.
+	 */
+	public Coord relativeTo(Coord coord, int dist) {
+		return new Coord(coord.getX() + x * dist, coord.getY() + y * dist);
 	}
 
 	/**
@@ -97,6 +104,26 @@ public enum Direction {
 		default:
 			return NONE;
 		}
+	}
+	
+	/**
+	 * Return the direction that is 90 degrees clockwise from this one.
+	 */
+	public Direction nextClockwise() {
+		if (this == NONE) {
+			return NONE;
+		}
+		return Direction.values()[(ordinal() + 1) % 4];
+	}
+	
+	/**
+	 * Return the direction that is 90 degrees counterclockwise from this one.
+	 */
+	public Direction nextCounterclockwise() {
+		if (this == NONE) {
+			return NONE;
+		}
+		return Direction.values()[(ordinal() + 3) % 4];
 	}
 	
 	/**

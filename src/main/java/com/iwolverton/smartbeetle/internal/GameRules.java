@@ -61,7 +61,7 @@ public class GameRules {
 		BeetleBuilder beetle = new BeetleBuilder(state.getBeetle());
 		if (action instanceof MoveAction) {
 			MoveAction a = (MoveAction) action;
-			Coord dest = a.getDirection().apply(beetle);
+			Coord dest = a.getDirection().relativeTo(beetle);
 			ensureInBounds(dest);
 			beetle.setCoord(dest);
 			beetle.addCharge(-settings.getChargeCostToMove(), settings.getBeetleMaxCharge());
@@ -69,7 +69,7 @@ public class GameRules {
 			return new GameState(state, beetle.build());
 		} else if (action instanceof ShootAction && beetle.getAmmo() > 0) {
 			beetle.addAmmo(-1);
-			Coord target = ((ShootAction) action).getDirection().apply(beetle);
+			Coord target = ((ShootAction) action).getDirection().relativeTo(beetle);
 			List<Ant> ants = state.getAnts().stream()
 					.filter(ant -> !ant.isAt(target))
 					.collect(Collectors.toList());

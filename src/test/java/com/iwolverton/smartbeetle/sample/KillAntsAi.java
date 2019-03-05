@@ -39,12 +39,12 @@ public class KillAntsAi implements BeetleAi {
 		}
 		
 		Direction dir = state.getBeetle().directionTo(pad);
-		Coord dest = dir.apply(state.getBeetle());
+		Coord dest = dir.relativeTo(state.getBeetle());
 		if (dest.diagonalDistanceFrom(state.getSpider()) < 2 || state.getPlayerAt(dest) instanceof Ant) {
 			dir = state.getBeetle().altDirectionTo(pad);
 			if (dest.isAt(state.getSpider())) {
 				// yet do not run into the spider
-				dest = dir.apply(state.getBeetle());
+				dest = dir.relativeTo(state.getBeetle());
 			}
 		}
 		

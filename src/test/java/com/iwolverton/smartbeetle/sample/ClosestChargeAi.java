@@ -1,5 +1,6 @@
 package com.iwolverton.smartbeetle.sample;
 import com.iwolverton.smartbeetle.BeetleAi;
+import com.iwolverton.smartbeetle.Direction;
 import com.iwolverton.smartbeetle.Game;
 import com.iwolverton.smartbeetle.GameState;
 import com.iwolverton.smartbeetle.actions.Action;
@@ -23,7 +24,9 @@ public class ClosestChargeAi implements BeetleAi {
 			pad = state.getChargingPads().get(1);
 		}
 		
-		return Action.move(state.getBeetle().directionTo(pad));
+		Direction directionToPad = state.getBeetle().directionTo(pad);
+		
+		return Action.move(directionToPad);
 	}
 
 }
