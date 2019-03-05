@@ -9,11 +9,11 @@ Smart Little Beetle is a programming game that provides an environment for build
 2. Drag or move the smartbeetle-0.1-SNAPSHOT.jar into your project.
 3. Add to build path: Right-click the JAR -> select "Build Path" -> "Add to Build Path"
 4. Add Javadoc (optional): Right-click the same JAR within Referenced Libraries -> select "Build Path" -> "Configure Build Path...".
-  1. Select "Javadoc location".
-  2. Click the "Edit" button.
-  3. For the Javadoc location path, paste `https://dwolverton.github.io/smart-beetle/`.
-  4. Click "OK"
-  5. Click "Apply and Close".
+   1. Select "Javadoc location".
+   2. Click the "Edit" button.
+   3. For the Javadoc location path, paste `https://dwolverton.github.io/smart-beetle/`.
+   4. Click "OK"
+   5. Click "Apply and Close".
 
 #### 2. Create an AI
 An AI is a class that implements the `BeetleAi` interface. It must also have a default or no-arg constructor.
