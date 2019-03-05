@@ -5,6 +5,10 @@ import java.awt.Color;
 import com.iwolverton.smartbeetle.Coord;
 import com.iwolverton.smartbeetle.internal.DrawingParams;
 
+/**
+ * There are 2 charging pads. The beetle receives charge when
+ * it ends its turn on one of these.
+ */
 public class ChargingPad extends GameElement {
 	
 	private static final Color COLOR = new Color(0xffff00);

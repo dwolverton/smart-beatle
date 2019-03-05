@@ -6,6 +6,12 @@ import java.awt.Color;
 import com.iwolverton.smartbeetle.Coord;
 import com.iwolverton.smartbeetle.internal.DrawingParams;
 
+/**
+ * The ant hill. Ants periodically appear from this hill. The frequency
+ * increases as the game goes on. Check its <code>nextMove</code> property
+ * to see how many turns until the next ant--one means it will be this turn,
+ * immediately after the beetle's action.
+ */
 public class AntHill extends ActingElement {
 	
 	private static final Color COLOR = new Color(0xbf8040);

@@ -12,6 +12,7 @@ You can also add a main method, as in the example below, that starts a new game 
 
 ```java
 import com.iwolverton.smartbeetle.BeetleAi;
+import com.iwolverton.smartbeetle.Direction;
 import com.iwolverton.smartbeetle.Game;
 import com.iwolverton.smartbeetle.GameState;
 import com.iwolverton.smartbeetle.actions.Action;
@@ -23,8 +24,8 @@ public class MyAi implements BeetleAi {
 	}
 
 	@Override
-	public Action turn(MyAi state) {
-		return Action.stay();
+	public Action turn(GameState state) {
+		return Action.move(Direction.E);
 	}
 
 }
@@ -74,7 +75,7 @@ The game consists of a 20 x 20 field of spaces identified by x,y coordinates. (0
 
 * *Charging Pads* The beetle receives charge when it ends its turn on one of these.
 * *The Ant Hill* Ants periodically appear from this hill. The frequency increases as the game goes on. Check its `nextMove` property to see how many turns until the next ant--one means it will be this turn, immediately after the beetle's action.
-* *Beads* The beetle can collect beads to be used as ammunition against ants. There is a constant total number of beads in the game. (The beetle's ammo + the beads on the field.
+* *Beads* The beetle can collect beads to be used as ammunition against ants. There is a constant total number of beads in the game. (the beetle's ammo + the beads on the field)
 
 ### Turns
 Each turn starts with the `BeatleAI` having a chance to examine the `GameState` and responding by selecting and returning one of three actions:

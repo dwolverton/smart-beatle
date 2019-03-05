@@ -5,6 +5,11 @@ import java.awt.Color;
 import com.iwolverton.smartbeetle.Coord;
 import com.iwolverton.smartbeetle.internal.DrawingParams;
 
+/**
+ * The spider is unstoppable, but slow. It doesn't move every turn. Check
+ * its <code>nextMove</code> property to see how many turns until it moves
+ * again--one means it will be this turn, immediately after the beetle's action.
+ */
 public class Spider extends ActingElement {
 	
 	private static final Color COLOR = new Color(0x000000);

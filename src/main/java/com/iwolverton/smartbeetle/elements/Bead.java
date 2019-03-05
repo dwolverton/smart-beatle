@@ -5,6 +5,12 @@ import java.awt.Color;
 import com.iwolverton.smartbeetle.Coord;
 import com.iwolverton.smartbeetle.internal.DrawingParams;
 
+/**
+ * The beetle can collect beads to be used as ammunition against ants.
+ * <p>
+ * There is a constant total number of beads in the game. (the beetle's ammo +
+ * the beads on the field)
+ */
 public class Bead extends GameElement {
 	
 	private static final Color COLOR = new Color(0x29a329);

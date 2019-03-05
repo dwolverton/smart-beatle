@@ -5,6 +5,10 @@ import java.awt.Color;
 import com.iwolverton.smartbeetle.Coord;
 import com.iwolverton.smartbeetle.internal.DrawingParams;
 
+/**
+ * Our protagonist, a robotic beetle that must keeps its battery charged
+ * while fighting off ants and avoiding the spider.
+ */
 public class Beetle extends ActingElement {
 	
 	private static final Color COLOR = new Color(0x0066ff);

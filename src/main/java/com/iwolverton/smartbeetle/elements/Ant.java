@@ -5,6 +5,14 @@ import java.awt.Color;
 import com.iwolverton.smartbeetle.Coord;
 import com.iwolverton.smartbeetle.internal.DrawingParams;
 
+/**
+ * Ants always move toward the beetle. They move one space per turn, just like
+ * the beetle. They can be stopped by shooting beads (ammo) at them, but
+ * only when they are directly adjacent to the beetle in one of the four
+ * cardinal directions.
+ * <p>
+ * Ants spawn from the ant hill at intervals.
+ */
 public class Ant extends ActingElement {
 	
 	public static final int FREQUENCY = 1;

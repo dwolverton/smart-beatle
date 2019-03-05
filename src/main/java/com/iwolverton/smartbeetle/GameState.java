@@ -81,6 +81,9 @@ public class GameState {
 
 	/**
 	 * The beetle can collect beads to be used as ammunition against ants.
+	 * <p>
+	 * There is a constant total number of beads in the game. (the beetle's ammo +
+	 * the beads on the field)
 	 */
 	public List<Bead> getBeads() {
 		return Collections.unmodifiableList(beads);
@@ -146,7 +149,7 @@ public class GameState {
 	 * Returns the charging pad, ant hill, or bead at the given coordinate. No
 	 * two of these are allowed to be in the same space at the same time.
 	 */
-	public GameElement getNonPlayerAt(int x, int y) {
+	public GameElement getTerrainAt(int x, int y) {
 		if (antHill.isAt(x, y)) {
 			return antHill;
 		}
@@ -167,9 +170,8 @@ public class GameState {
 	 * Returns the charging pad, ant hill, or bead at the given coordinate. No
 	 * two of these are allowed to be in the same space at the same time.
 	 */
-	public GameElement getNonPlayerAt(Coord coordinate) {
-		return getNonPlayerAt(coordinate.getX(), coordinate.getY());
+	public GameElement getTerrainAt(Coord coordinate) {
+		return getTerrainAt(coordinate.getX(), coordinate.getY());
 	}
-
 	
 }

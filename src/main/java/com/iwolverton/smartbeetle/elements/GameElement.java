@@ -3,6 +3,9 @@ package com.iwolverton.smartbeetle.elements;
 import com.iwolverton.smartbeetle.Coord;
 import com.iwolverton.smartbeetle.internal.DrawingParams;
 
+/**
+ * Superclass for any game element
+ */
 public abstract class GameElement extends Coord {
 
 	public GameElement(int x, int y) {

@@ -52,7 +52,7 @@ public class Settings {
 	/**
 	 * With each new ant the ant frequency is multiplied by this
 	 * modifier to determine the next frequency. It should be in the
-	 * range 0 < x <= 1.
+	 * range 0 &lt; x &lt;= 1.
 	 */
 	public double getAntHillFrequencyModifier() {
 		return antHillFrequencyModifier;

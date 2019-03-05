@@ -45,10 +45,10 @@ public enum Direction {
 	 */
 	public int getSign() {
 		switch (this) {
-		case N:
+		case S:
 		case E:
 			return 1;
-		case S:
+		case N:
 		case W:
 			return -1;
 		default:
