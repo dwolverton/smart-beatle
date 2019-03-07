@@ -87,13 +87,8 @@ public class GameRules {
 	}
 
 	private static void ensureInBounds(Coord coord) {
-		ensureInBounds(coord.getX(), coord.getY());
-	}
-
-	private static void ensureInBounds(int x, int y) {
-		if (x < 0 || y < 0 || x >= GameState.FIELD_DIMENSION
-				|| y >= GameState.FIELD_DIMENSION) {
-			throw new RuntimeException("Out of Bounds: " + x + "," + y);
+		if (coord.isOutOfBounds()) {
+			throw new RuntimeException("Out of Bounds: " + coord.getX() + "," + coord.getY());
 		}
 	}
 

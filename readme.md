@@ -5,13 +5,13 @@ Smart Little Beetle is a programming game that provides an environment for build
 ## Getting Started
 #### 1. Download and install the JAR.
 
-1. Download the JAR here: [smartbeetle-0.1-SNAPSHOT.jar](https://github.com/dwolverton/smart-beetle/blob/master/smartbeetle-0.1-SNAPSHOT.jar?raw=true)
-2. Drag or move the smartbeetle-0.1-SNAPSHOT.jar into your project.
-3. Add to build path: Right-click the JAR -> select "Build Path" -> "Add to Build Path"
-4. Add Javadoc (optional): Right-click the same JAR within Referenced Libraries -> select "Build Path" -> "Configure Build Path...".
-   1. Select "Javadoc location".
+1. Download the JARs here: [smartbeetle-0.2-SNAPSHOT.jar](https://github.com/dwolverton/smart-beetle/blob/master/smartbeetle-0.2-SNAPSHOT.jar?raw=true), [smartbeetle-0.2-SNAPSHOT-sources.jar](https://github.com/dwolverton/smart-beetle/blob/master/smartbeetle-0.2-SNAPSHOT-sources.jar?raw=true)
+2. Drag or move both JARs into your project.
+3. Add to build path: Right-click the smartbeetle-0.2-SNAPSHOT.jar JAR -> select "Build Path" -> "Add to Build Path"
+4. Add Sources (optional): Right-click the same JAR within Referenced Libraries -> select "Build Path" -> "Configure Build Path...".
+   1. Select "Source attachment".
    2. Click the "Edit" button.
-   3. For the Javadoc location path, paste `https://dwolverton.github.io/smart-beetle/`.
+   3. Brose for a workspace location and select the smartbeetle-0.2-SNAPSHOT-sources.jar JAR.
    4. Click "OK"
    5. Click "Apply and Close".
 

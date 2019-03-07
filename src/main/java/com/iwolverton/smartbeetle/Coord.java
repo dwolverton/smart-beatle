@@ -56,6 +56,14 @@ public class Coord {
 	}
 	
 	/**
+	 * Is this coordinate out of bounds.
+	 */
+	public boolean isOutOfBounds() {
+		return x < 0 || y < 0 || x >= GameState.FIELD_DIMENSION
+				|| y >= GameState.FIELD_DIMENSION;
+	}
+	
+	/**
 	 * Get the distance from this coordinate to another coordinate making
 	 * only cardinal direction moves (no diagonals). This is useful since
 	 * the game only allows cardinal direction moves.
@@ -89,6 +97,36 @@ public class Coord {
 	 */
 	public int diagonalDistanceFrom(Coord other) {
 		return diagonalDistanceFrom(other.x, other.y);
+	}
+	
+	/**
+	 * Get the direction of the edge closest to this coordinate. For example,
+	 * the closest edge to coordinate x=3, y= 12 is <code>Direction.W</code>.
+	 */
+	public Direction directionToNearestEdge() {
+		// distance from center
+		float xFromCenter = GameState.FIELD_DIMENSION / 2 - x - .5f;
+		float yFromCenter = GameState.FIELD_DIMENSION / 2 - y - .5f;
+		if (Math.abs(yFromCenter) > Math.abs(xFromCenter)) {
+			return Direction.forAxis(Axis.Y, (int) -Math.signum(yFromCenter));
+		} else {
+			return Direction.forAxis(Axis.X, (int) -Math.signum(xFromCenter));
+		}
+	}
+	
+	/**
+	 * How far is the given edge from this coordinate? If the coordinate is right
+	 * next to that edge, the distance is 0. For example, the coordinate x=3, y=12
+	 * is 3 units from the <code>Direction.W</code> edge.
+	 */
+	public int distanceToEdge(Direction dir) {
+		switch (dir) {
+		case N: return y - 0;
+		case S: return GameState.FIELD_DIMENSION - y - 1;
+		case E: return GameState.FIELD_DIMENSION - x - 1;
+		case W: return x - 0;
+		default: return Integer.MAX_VALUE; // infinite
+		}
 	}
 	
 	/**
